@@ -1,0 +1,27 @@
+name: Update README and Push Changes
+
+on:
+  push:
+    branches:
+      - main  # Modify this to match your default branch name
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Update README
+        run: |
+          # Modify the README file using a command-line tool
+          echo "This is a modified README file." > README.md
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "Your GitHub Username"
+          git config --global user.email "your-email@example.com"
+          git add README.md
+          git commit -m "Update README"
+          git push origin main  # Modify 'main' to match your default branch name
