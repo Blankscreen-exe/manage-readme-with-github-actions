@@ -20,8 +20,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name "Your GitHub Username"
-          git config --global user.email "your-email@example.com"
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git add README.md
           git commit -m "Update README"
           git push origin main  # Modify 'main' to match your default branch name
