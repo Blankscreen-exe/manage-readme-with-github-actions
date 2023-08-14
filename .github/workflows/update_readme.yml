@@ -22,16 +22,13 @@ jobs:
           echo "==> COMMIT MESSAGE: $commit_message"
           file_name=$(echo $commit_message | cut -d' ' -f2)
           # echo "::set-output name=file_name::$file_name"
-          echo "{name}={file_name}" >> $file_name
+          echo "{file_name}={$file_name}" >> $GITHUB_ENV
 
       - name: Update README
         run: |
-          file_name="${{ steps.file-name.outputs.file_name }}"
+          file_name="$file_name"
           
           echo "FILENAME ==> $file_name"
-          
-          # Modify the README file using a command-line tool
-          # echo "1. This is a modified README file." >> README.md
           
           if [ -f "docs/$file_name" ]; then
             echo "==FILE WAS CREATED=="
