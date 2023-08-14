@@ -23,7 +23,7 @@ jobs:
           file_name=$(echo $commit_message | cut -d' ' -f2)
           # echo "::set-output name=file_name::$file_name"
           # REF: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
-          echo "{file_name}={$file_name}" >> $GITHUB_ENV
+          echo "file_name=$file_name" >> $GITHUB_ENV
 
       - name: Update README
         run: |
