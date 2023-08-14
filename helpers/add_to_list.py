@@ -21,6 +21,17 @@ def add_line(file_path, file_name, file_link):
     In the 'links.md' file, the following line will be appended:
         - [Example File](https://example.com/files/example_file.txt)
     """
+    # check if the file link already exists in README
+    with open(file_path, 'r') as fp:
+        for l_no, line in enumerate(fp):
+            # search string
+            if file_link in line:
+                print('link found in README')
+                print('Line Number:', l_no)
+                print('Line:', line)
+                # don't look for next lines 
+                return
+
     file_name = file_name.split(".")[0].replace("_", " ").title()
     
     text = f'- [{file_name}]({file_link})'
