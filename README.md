@@ -9,3 +9,4 @@ This `README.md` file is auto written by Github Actions. The list below is a lis
 # List Of Files In `docs/`
 
 - [Za Warudo](/docs/za_warudo.md)
+- [Star Platinum](docs/star_platinum.md)
