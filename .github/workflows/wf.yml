@@ -20,7 +20,7 @@ jobs:
         run: |
           commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
           echo "==> COMMIT MESSAGE: $commit_message"
-          file_name=$(echo $commit_message | cut -d' ' -f2)
+          file_name = $(echo $commit_message | cut -d' ' -f2)
           echo "::set-output name=file_name::$file_name"
 
       - name: Update README
@@ -32,7 +32,7 @@ jobs:
           
           if [ -f "docs/${{ steps.file-name.outputs.file_name }}" ]; then
             echo "==FILE WAS CREATED=="
-            file_link="docs/$file_name"
+            file_link = "docs/$file_name"
             python3 ./helpers/add_to_list.py ./README.md $file_name $file_link
           else
             echo "==FILE WAS DELETED=="
