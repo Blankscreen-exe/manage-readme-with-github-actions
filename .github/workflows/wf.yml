@@ -15,10 +15,25 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v2
 
+      - name: Get file name
+        id: file-name
+        run: |
+          commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
+          echo "==> COMMIT MESSAGE: $commit_message"
+          file_name=$(echo $commit_message | cut -d' ' -f2)
+          echo "::set-output name=file_name::$file_name"
+
       - name: Update README
         run: |
           # Modify the README file using a command-line tool
-          echo "This is a modified README file." >> README.md
+          echo "\n1. This is a modified README file." >> README.md
+          if [ -f "projects/$file_name" ]; then
+            echo "==FILE WAS CREATED=="
+          else
+            # sed -i "/$link/d" README.md
+            python3 ./helpers/delete_line.py $file_name README.md
+            echo "==FILE WAS DELETED=="
+          fi     
 
       - name: Commit and Push Changes
         env:
@@ -28,5 +43,4 @@ jobs:
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git add README.md
           git commit -m "Update README"
-          # git push https://${{ secrets.A_TOKEN }} HEAD:main
-          git push origin main  # Modify 'main' to match your default branch name
+          git push origin main
