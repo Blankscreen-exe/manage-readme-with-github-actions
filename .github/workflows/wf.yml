@@ -3,7 +3,7 @@ name: Update README and Push Changes
 on:
   push:
     branches:
-      - main  # Modify this to match your default branch name
+      - main
     paths: 
       - 'docs/*'
 
@@ -46,5 +46,5 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git add README.md
-          git commit -m "Update README"
+          git commit -m "added ${{ steps.file-name.outputs.file_name }} to docs list"
           git push origin main
