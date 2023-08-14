@@ -28,7 +28,7 @@ jobs:
           echo ${{ steps.file-name.outputs.file_name }}
           # Modify the README file using a command-line tool
           echo "1. This is a modified README file." >> README.md
-          if [ -f "docs/$file_name" ]; then
+          if [ -f "docs/${{ steps.file-name.outputs.file_name }}" ]; then
             echo "==FILE WAS CREATED=="
           else
             echo "==FILE WAS DELETED=="
