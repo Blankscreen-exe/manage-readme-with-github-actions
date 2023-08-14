@@ -1,0 +1,53 @@
+name: Update README and Push Changes
+
+on:
+  push:
+    branches:
+      - main
+    paths: 
+      - 'docs/*'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Get file name
+        id: file-name
+        run: |
+          commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
+          echo "==> COMMIT MESSAGE: $commit_message"
+          file_name=$(echo $commit_message | cut -d' ' -f2)
+          echo "::set-output name=file_name::$file_name"
+
+      - name: Update README
+        run: |
+          file_name="${{ steps.file-name.outputs.file_name }}"
+          
+          echo "FILENAME ==> $file_name"
+          
+          # Modify the README file using a command-line tool
+          # echo "1. This is a modified README file." >> README.md
+          
+          if [ -f "docs/$file_name" ]; then
+            echo "==FILE WAS CREATED=="
+            file_link="docs/$file_name"
+            echo "FILE LINK ==> $file_link"
+            python3 ./helpers/add_to_list.py ./README.md $file_name $file_link
+          else
+            echo "==FILE WAS DELETED=="
+            python3 ./helpers/delete_line.py $file_name ./README.md
+          fi     
+
+      - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git add README.md
+          git commit -m "added ${{ steps.file-name.outputs.file_name }} to docs list"
+          git push origin main
