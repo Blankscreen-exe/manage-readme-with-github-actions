@@ -25,13 +25,12 @@ jobs:
 
       - name: Update README
         run: |
+          echo ${{ steps.file-name.outputs.file_name }}
           # Modify the README file using a command-line tool
           echo "\n1. This is a modified README file." >> README.md
-          if [ -f "projects/$file_name" ]; then
+          if [ -f "docs/$file_name" ]; then
             echo "==FILE WAS CREATED=="
           else
-            # sed -i "/$link/d" README.md
-            python3 ./helpers/delete_line.py $file_name README.md
             echo "==FILE WAS DELETED=="
           fi     
 
