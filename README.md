@@ -13,3 +13,4 @@ This `README.md` file is auto written by Github Actions. The list below is a lis
 - [Magician'S Red](docs/magician's_red.md)
 - [Hermit Purple](docs/hermit_purple.md)
 - [Cream](docs/cream.md)
+- [Cream 2](docs/cream_2.md)
