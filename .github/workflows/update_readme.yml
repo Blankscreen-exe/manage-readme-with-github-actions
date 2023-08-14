@@ -21,7 +21,8 @@ jobs:
           commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
           echo "==> COMMIT MESSAGE: $commit_message"
           file_name=$(echo $commit_message | cut -d' ' -f2)
-          echo "::set-output name=file_name::$file_name"
+          # echo "::set-output name=file_name::$file_name"
+          echo "{name}={file_name}" >> $file_name
 
       - name: Update README
         run: |
