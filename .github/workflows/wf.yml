@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Modify this to match your default branch name
+    paths: 
+      - 'docs/*'
 
 jobs:
   update-readme:
