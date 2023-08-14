@@ -11,3 +11,4 @@ This `README.md` file is auto written by Github Actions. The list below is a lis
 - [Za Warudo](/docs/za_warudo.md)
 - [Star Platinum](docs/star_platinum.md)
 - [Magician'S Red](docs/magician's_red.md)
+- [Hermit Purple](docs/hermit_purple.md)
